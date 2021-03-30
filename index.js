@@ -7,12 +7,6 @@ const path = require('path')
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-// app.use("/api/tasks", require('./methods/get.tasks'))
-// app.use("/api/tasks", require('./methods/post.task'))
-
-// app.use("/api/tasks", require('./methods/patch.task'))
-// app.use("/api/tasks", require('./methods/get.task'))
-// app.use("/api/tasks", require('./methods/del.task'))
 
 async function useControllers() {
     const paths = klawSync(`${__dirname}/methods`, {nodir: true});
