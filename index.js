@@ -1,23 +1,35 @@
-// const fs = require('file-system')
 const express = require('express')
-// const { v4: uuidv4 } = require('uuid')
-// const { body, validationResult } = require('express-validator')
 const app = express()
-// const jsonParser = express.json()
-const PORT = 3000
-// const filePath = 'tasks.json'
-
-// let uuid = uuidv4()
+const PORT = process.env.PORT || 3000
+const klawSync = require('klaw-sync')
+const path = require('path')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
-app.use("/api/tasks", require('./methods/get.tasks'));
-app.use("/api/tasks", require('./methods/post.task'));
+// app.use("/api/tasks", require('./methods/get.tasks'))
+// app.use("/api/tasks", require('./methods/post.task'))
 
-app.use("/api/tasks", require('./methods/patch.task'));
-app.use("/api/tasks", require('./methods/get.task'));
-app.use("/api/tasks", require('./methods/del.task'));
+// app.use("/api/tasks", require('./methods/patch.task'))
+// app.use("/api/tasks", require('./methods/get.task'))
+// app.use("/api/tasks", require('./methods/del.task'))
+
+async function useControllers() {
+    const paths = klawSync(`${__dirname}/methods`, {nodir: true});
+    let controllersCount = 0;
+    paths.forEach( (file) => {
+        if (path.basename(file.path)[0] === '_' || path.basename(file.path)[0] === '.') return;
+        app.use('/api/tasks', require(`${file.path}`));
+        controllersCount++;
+    });
+
+    console.info(`Total controllers: ${controllersCount}`);
+};
+
+
+app.use(express.static('methods'));
+
+useControllers()
 
 
 app.listen(PORT, () => {
