@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const PORT = process.env.PORT || 3000
+// const PORT = process.env.PORT || 3000
 const klawSync = require('klaw-sync')
 const path = require('path')
 
@@ -26,6 +26,6 @@ app.use(express.static('methods'));
 useControllers()
 
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('Server has been started...')
 })
