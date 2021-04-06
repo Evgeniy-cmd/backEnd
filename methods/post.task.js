@@ -18,7 +18,7 @@ const router = Router.post('/', body('name').isString(), function(req,res){
 
         const newTask = {
             uuid: uuidv4(), 
-            date: new Date(), 
+            createdAt: new Date(), 
             done: false, 
             name: req.body.name
           }
@@ -26,7 +26,6 @@ const router = Router.post('/', body('name').isString(), function(req,res){
         if(fs.existsSync(filePath)){
             const content  = fs.readFileSync(filePath, 'utf8')     
             const tasks = JSON.parse(content)
-            console.log(content)
             tasks.push(newTask)
 
             fs.writeFileSync(filePath, JSON.stringify(tasks), err => {
