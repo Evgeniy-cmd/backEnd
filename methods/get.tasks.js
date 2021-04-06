@@ -8,7 +8,7 @@ const router = Router.get('/:id', (req, res) => {
     const taskId = req.params.id
     const content = fs.readFileSync(filePath, 'utf8')
     const tasks = JSON.parse(content)
-    const task = tasks.filter(el => el.uuid === Number(taskId))
+    const task = tasks.filter(el => el.uuid === taskId)
     if(task.length > 0) return res.send(task)
     res.status(404).send('Task not found')
     })

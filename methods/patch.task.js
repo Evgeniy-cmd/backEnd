@@ -18,12 +18,12 @@ body('done').optional().isBoolean(), (req, res) => {
     const content = fs.readFileSync(filePath, 'utf8')
     const tasks = JSON.parse(content) 
     const newTask = tasks.map(el => {
-        if(el.uuid === Number(taskId)){
+        if(el.uuid === taskId){
             return el = {...el, ...req.body}
         }
         return el
     })
-    fs.writeFileSync('tasks.json', content)
+    fs.writeFileSync('tasks.json', JSON.stringify(newTask))
     res.send(newTask)
 })
 
