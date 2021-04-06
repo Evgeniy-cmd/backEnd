@@ -4,7 +4,7 @@ const Router = express.Router()
 const jsonParser = express.json()
 const filePath = 'tasks.json'
 const { v4: uuidv4 } = require('uuid')
-let uuid = uuidv4()
+
 const { body, validationResult } = require('express-validator')
 
 const router = Router.post('/', jsonParser, body('name').optional().isString(),
@@ -19,7 +19,7 @@ body('done').optional().isBoolean(), (req, res) => {
     const content = fs.readFileSync(filePath, 'utf8')
     const tasks = JSON.parse(content)
     const el = {
-        uuid: uuid,
+        uuid: uuidv4(),
         createdAt: new Date(),
         done: false,
         name: req.body.name
@@ -27,7 +27,7 @@ body('done').optional().isBoolean(), (req, res) => {
 
     tasks.push(el)    
     fs.writeFileSync("tasks.json", JSON.stringify(tasks))
-    res.send(el)
+    res.send(tasks)
 })
 
 
