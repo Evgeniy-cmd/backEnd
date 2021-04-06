@@ -15,9 +15,6 @@ body('done').optional().isBoolean(), (req, res) => {
       return res.status(422).send('Invalid field in request');
     }
 
-
-    const content = fs.readFileSync(filePath, 'utf8')
-    const tasks = JSON.parse(content)
     const el = {
         uuid: uuidv4(),
         createdAt: new Date(),
@@ -25,9 +22,16 @@ body('done').optional().isBoolean(), (req, res) => {
         name: req.body.name
     }
 
-    const newTask = tasks.push(el)    
-    fs.writeFileSync("tasks.json", JSON.stringify(tasks))
-    res.send(newTask)
+    if(fs.existsSync(filePath)){
+      const content = fs.readFileSync(filePath, 'utf8')
+      const tasks = JSON.parse(content)
+      const newTask = tasks.push(el)
+      fs.writeFileSync(filePath, JSON.stringify(tasks))
+      res.send(newTask)
+    } else {
+      fs.appendFile(filePath, JSON.stringify([newTask]))
+      res.send(newTask)
+    }
 })
 
 

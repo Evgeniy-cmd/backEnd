@@ -19,7 +19,8 @@ body('done').optional().isBoolean(), (req, res) => {
     const tasks = JSON.parse(content) 
     const newTask = tasks.map(el => {
         if(el.uuid === taskId){
-            return el = {...el, ...req.body}
+            el = {...el, ...req.body}
+            return el
         }
         return el
     })
