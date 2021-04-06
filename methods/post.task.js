@@ -26,7 +26,7 @@ body('done').optional().isBoolean(), (req, res) => {
     }
 
     const newTask = tasks.push(el)    
-    fs.writeFileSync("tasks.json", JSON.stringify(newTask))
+    fs.writeFileSync("tasks.json", JSON.stringify(tasks))
     res.send(newTask)
 })
 
