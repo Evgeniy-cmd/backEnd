@@ -16,16 +16,16 @@ module.exports = (sequelize, DataTypes) => {
   };
   Task.init({
     uuid: {
-      types: DataTypes.UUID,
+      type: DataTypes.UUID,
       primaryKey: true,
       defaultValue: UUIDV4()
     },
     name: {
-      types: DataTypes.STRING,
+      type: DataTypes.STRING,
       unique: true
     },
     done: {
-      types: DataTypes.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       defaultValue: false
     }
   }, {

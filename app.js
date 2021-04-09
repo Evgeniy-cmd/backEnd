@@ -6,6 +6,7 @@ const morgan = require('morgan')
 const klawSync = require('klaw-sync')
 const path = require('path')
 const cors = require('cors')
+const db = require('./models/index')
 
 app.use(cors())
 app.use(morgan('tiny'))
