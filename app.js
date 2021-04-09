@@ -19,7 +19,7 @@ async function useControllers() {
     let controllersCount = 0;
     paths.forEach( (file) => {
         if (path.basename(file.path)[0] === '_' || path.basename(file.path)[0] === '.') return;
-        app.use('/api/tasks', require(`${file.path}`));
+        app.use('/', require(`${file.path}`));
         controllersCount++;
     });
 
