@@ -1,15 +1,11 @@
-const fs = require('file-system')
 const express = require('express')
 const Router = express.Router()
-const filePath = 'tasks.json'
+const { Task } = require('../models')
 
-const router = Router.delete('/:id', (req, res) => {
+const router = Router.delete('/task/:id', async (req, res) => {
     const taskId = req.params.id;
-    const content = fs.readFileSync(filePath, 'utf8')
-    const tasks = JSON.parse(content)
-    const newTask = tasks.filter(el => el.uuid !== taskId)
-    fs.writeFileSync('tasks.json', JSON.stringify(newTask))
-    res.send(newTask)
+    await Task.destroy({ where: { uuid: taskId } })
+    res.status(203).send()
 })
 
 module.exports = router

@@ -1,6 +1,7 @@
 'use strict';
+const { UUID } = require('sequelize');
 const {
-  Model
+  Model, UUIDV4
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Task extends Model {
@@ -14,9 +15,19 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   Task.init({
-    uuid: DataTypes.UUID,
-    name: DataTypes.STRING,
-    done: DataTypes.BOOLEAN
+    uuid: {
+      types: DataTypes.UUID,
+      primaryKey: true,
+      defaultValue: UUIDV4()
+    },
+    name: {
+      types: DataTypes.STRING,
+      unique: true
+    },
+    done: {
+      types: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   }, {
     sequelize,
     modelName: 'Task',

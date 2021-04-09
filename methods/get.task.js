@@ -1,14 +1,12 @@
-const fs = require('file-system')
 const express = require('express')
 const Router = express.Router()
+const { Task } = require('../models')
 
-const filePath = 'tasks.json'
 
-const router = Router.get('/', (req, res) => {
-    const content = fs.readFileSync(filePath, 'utf8')
-    const tasks = JSON.parse(content)
-    if(tasks.length > 0) return res.send(tasks)
-    res.status(404).send("Task not found")
+const router = Router.get('/task/:id', (req, res) => {
+    const taskId = req.params.id
+    const task = Task.findAll({ where: { uuid: taskId } })
+    res.send(task)
 })
 
 module.exports = router
