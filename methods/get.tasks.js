@@ -1,6 +1,7 @@
 const express = require('express')
 const Router = express.Router()
 const { Task } = require('../models')
+const limitOfTasks = 5
 
 
 const router = Router.get('/task',
@@ -8,10 +9,10 @@ const router = Router.get('/task',
         const param = {
             where: {},
             order: [],
-            // offset: req.query.page * 5,
-            limit: 5
+            offset: (req.query.page - 1) * limitOfTasks,
+            limit: limitOfTasks
         }
-        
+        console.log(req.query)
         if (req.query.done)
             param.where = { done: req.query.done }
         if (req.query.order)

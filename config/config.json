@@ -1,5 +1,19 @@
 {
   "development": {
+    "username": "postgres",
+    "password": "1234567890",
+    "database": "postgres",
+    "host": "localhost",
+    "dialect": "postgres",
+    "port": 5432,
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
+  },
+  "production": {
     "username": "xtolfiswmuypvu",
     "password": "80604ca44548c7dc9cb085ab0050d799510802165243c2f61f9720090b0142e1",
     "database": "d8srm87upt5q9u",
