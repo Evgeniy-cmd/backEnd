@@ -7,9 +7,8 @@ const router = Router.patch('/task/:id',
     body('name').optional().isString(),
     body('done').optional().isBoolean(),
     async (req, res) => {
-
-        const errors = validationResult(req);
         const taskId = req.params.id
+        const errors = validationResult(req);
 
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() })

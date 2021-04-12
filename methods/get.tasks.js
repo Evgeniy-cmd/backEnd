@@ -8,10 +8,10 @@ const router = Router.get('/task',
         const param = {
             where: {},
             order: [],
-            offset: req.query.page * 5,
+            // offset: req.query.page * 5,
             limit: 5
         }
-
+        
         if (req.query.done)
             param.where = { done: req.query.done }
         if (req.query.order)
