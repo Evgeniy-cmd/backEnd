@@ -20,8 +20,7 @@ const router = Router.post('/task',
             return res.status(400).send('Task already exist')
         }
         const task = await Task.create({ name: req.body.name })
-        const countTask = await Task.findAndCountAll()
-        res.send({ task, countTask })
+        res.send({ task })
     })
 
 module.exports = router
