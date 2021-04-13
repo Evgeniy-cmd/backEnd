@@ -2,7 +2,6 @@ const express = require('express')
 const Router = express.Router()
 const { Task } = require('../models')
 const { query } = require("express-validator");
-const limitOfTasks = 5
 
 const router = Router.get('/task',
     query("page").isNumeric(),
@@ -10,8 +9,8 @@ const router = Router.get('/task',
         const param = {
             where: {},
             order: [],
-            offset: req.query.page * limitOfTasks,
-            limit: limitOfTasks
+            offset: req.query.page * 5,
+            limit: 5
         }
 
         if (req.query.done)
