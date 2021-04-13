@@ -10,7 +10,7 @@ const router = Router.get('/task',
         const param = {
             where: {},
             order: [],
-            offset: req.query.page * limitOfTasks,
+            offset: (req.query.page - 1) * limitOfTasks,
             limit: limitOfTasks
         }
 
