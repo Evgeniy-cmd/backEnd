@@ -1,14 +1,14 @@
 const express = require("express")
 const Router = express.Router()
-const { check, validationResult, Result } = require("express-validator")
-const { User } = require("../../models")
+const { check, validationResult } = require("express-validator")
+const { User } = require("../models")
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv").config()
 
 const postUser = Router.post(
-     "/",
-  check("email").isEmail().withMessage("Invalid email"),
-  check("password").isString().withMessage("Invalid email"),
+     "/user/auth",
+  check("email").isEmail(),
+  check("password").isString(),
 
   async (req, res) => {
     try {
@@ -23,7 +23,7 @@ const postUser = Router.post(
 
       if (!user) throw new Error("User with this email doesn't exist");
 
-      const token = jwt.sign({ uuid: user.uuid }, process.env.SECRET, {
+      const token = jwt.sign({ uuid: user.uuid }, process.env.TOKEN_SECRET, {
         expiresIn: 180,
       });
 
@@ -35,6 +35,7 @@ const postUser = Router.post(
         },
       });
     } catch (error) {
+        console.log(error)
       return res.status(400).json({ error: error.message });
     }
   }

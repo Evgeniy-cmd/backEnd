@@ -1,5 +1,5 @@
 'use strict';
-
+require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
@@ -8,7 +8,12 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '../../config/config.json')[env];
 const db = {};
 
-const sequelize = new Sequelize(process.env.DATABASE_URL, config);
+
+const url = process.env.DATABASE_URL
+
+console.log(url)
+
+const sequelize = new Sequelize(url, config);
 
 fs
   .readdirSync(__dirname)
