@@ -15,7 +15,7 @@ const postUser = Router.post(
         try {
             const errors = validationResult(req)
             if (!errors.isEmpty()) {
-              return res.status(422).json({ errors: errors.array()[0].msg })
+              return res.status(422).send('All forms must be filled') 
             }
 
             const checkIfExist = await User.findOne({
@@ -44,9 +44,7 @@ const postUser = Router.post(
               })
             
           } catch (error) {
-              console.log(error)
-            return res.status(400).json({ error: error.message })
-        
+            return res.status(400).send(error.message)
           }
         }
       );

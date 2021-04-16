@@ -4,7 +4,7 @@ const { Task } = require('../models')
 const { auth } = require('../authorization')
 const { query } = require("express-validator");
 
-const router = Router.get('/task', auth, 
+const router = Router.get('/task', auth,
     query("page").isNumeric(),
     async (req, res) => {
         const param = {
@@ -17,10 +17,13 @@ const router = Router.get('/task', auth,
         }
 
         if (req.query.done)
-            param.where = { done: req.query.done }
+            param.where = {
+                done: req.query.done,
+                userId: res.locals.userId
+            }
         if (req.query.order)
             param.order.push(['createdAt', `${req.query.order}`])
-            
+
         const task = await Task.findAndCountAll(param)
         res.send(task)
     })

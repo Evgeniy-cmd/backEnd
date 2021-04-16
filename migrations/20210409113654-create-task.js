@@ -8,7 +8,7 @@ module.exports = {
       },
       name: {
         type: Sequelize.STRING,
-        unique: true
+        unique: false
       },
       done: {
         type: Sequelize.BOOLEAN

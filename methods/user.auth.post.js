@@ -14,14 +14,14 @@ const postUser = Router.post(
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        return res.status(422).json({ errors: errors.array()[0].messsage });
+        return res.status(422).send('All forms must be filled') 
       }
 
       const user = await User.findOne({
         where: { email: req.body.email },
       });
 
-      if (!user) throw new Error("User with this email doesn't exist");
+      if (!user) throw new Error('User with this email doesnt exist')
 
       const token = jwt.sign({ uuid: user.uuid }, process.env.TOKEN_SECRET, {
         expiresIn: 1800,
@@ -36,7 +36,7 @@ const postUser = Router.post(
       });
     } catch (error) {
         console.log(error)
-      return res.status(400).json({ error: error.message });
+      return res.status(400).send(error.messsage)
     }
   }
 )

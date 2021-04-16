@@ -9,7 +9,6 @@ const Router = express.Router()
 const router = Router.post('/task', auth,
     body('name').isString(),
     async (req, res) => {
-        console.log(1111)
         const errors = validationResult(req)
         if (!errors.isEmpty) {
             return res.status(400).json({ errors: errors.array() })
