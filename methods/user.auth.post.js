@@ -24,7 +24,7 @@ const postUser = Router.post(
       if (!user) throw new Error("User with this email doesn't exist");
 
       const token = jwt.sign({ uuid: user.uuid }, process.env.TOKEN_SECRET, {
-        expiresIn: 180,
+        expiresIn: 1800,
       });
 
       res.json({

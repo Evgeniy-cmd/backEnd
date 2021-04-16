@@ -32,7 +32,7 @@ const postUser = Router.post(
               })
       
               const token = jwt.sign({ uuid: createUser.dataValues.uuid }, process.env.TOKEN_SECRET, {
-                expiresIn: 180,
+                expiresIn: 1800,
               })
       
               res.send({

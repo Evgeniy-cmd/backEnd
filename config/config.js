@@ -5,12 +5,12 @@ module.exports = {
     "url": process.env.DATABASE_URL,
     "dialect": "postgres",
     "port": 5432,
-    "dialectOptions": {
-      "ssl": {
-        "require": true,
-        "rejectUnauthorized": false
-      }
-    }
+    // "dialectOptions": {
+    //   "ssl": {
+    //     "require": true,
+    //     "rejectUnauthorized": false
+    //   }
+    // }
   },
   "production": {
     "dialect": "postgres",

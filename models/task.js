@@ -1,5 +1,4 @@
 'use strict';
-const { UUID } = require('sequelize');
 const {
   Model, UUIDV4
 } = require('sequelize');
@@ -29,9 +28,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false
     },
     userId: {
-      type: DataTypes.UUID,
-      primaryKey: true,
-      defaultValue: UUIDV4()
+      type: DataTypes.UUID
     }
   }, {
     sequelize,
