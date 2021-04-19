@@ -19,7 +19,7 @@ const postUser = Router.post(
 
       const user = await User.findOne({
         where: { email: req.body.email },
-      });
+      })
 
       if (!user) throw new Error('User with this email doesnt exist')
 
